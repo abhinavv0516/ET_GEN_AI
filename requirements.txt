@@ -1,0 +1,11 @@
+langchain>=0.2.0
+langchain-core
+langchain-openai
+langgraph
+yfinance
+pandas
+ta
+streamlit
+plotly
+chromadb
+python-dotenv
