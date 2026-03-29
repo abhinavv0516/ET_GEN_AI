@@ -11,7 +11,7 @@ def analyze_fundamentals(state: GraphState) -> GraphState:
     if not os.environ.get("GOOGLE_API_KEY"):
         return {"fundamental_signals": {"summary": "API Key missing, fundamental analysis skipped.", "sentiment_score": 0}}
 
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash", temperature=0)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an expert financial analyst. Analyze the following news and company info to determine the fundamental outlook. Output a JSON object with 'summary' (str) and 'sentiment_score' (int from -10 to 10)."),
