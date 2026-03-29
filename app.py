@@ -1,5 +1,7 @@
 import streamlit as st
 import plotly.graph_objects as go
+from dotenv import load_dotenv
+load_dotenv() # Load environment variables from .env file
 from src.graph import build_graph
 
 st.set_page_config(page_title="OmniInvest AI", layout="wide")
