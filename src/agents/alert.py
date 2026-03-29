@@ -18,7 +18,7 @@ def generate_alert(state: GraphState) -> GraphState:
     if not os.environ.get("GOOGLE_API_KEY"):
         return {"final_alert": f"[{rating}] {ticker} looks interesting with a conviction score of {int(conviction)}.\n\nNote: API Key missing, full alert generation skipped. Historical patterns indicate:\n{similar_text}"}
 
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.3)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an AI investment advisor for Indian retail investors. Write a plain-English, easy to understand, high-conviction alert about a stock."),
