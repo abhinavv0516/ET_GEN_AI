@@ -1,5 +1,5 @@
 import os
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import GraphState
 from src.db.vector_store import get_similar_patterns
@@ -15,10 +15,10 @@ def generate_alert(state: GraphState) -> GraphState:
     similar = get_similar_patterns(conviction)
     similar_text = "\n".join([f"- {s}" for s in similar]) if similar else "No matching historical patterns found."
     
-    if not os.environ.get("OPENAI_API_KEY"):
+    if not os.environ.get("GOOGLE_API_KEY"):
         return {"final_alert": f"[{rating}] {ticker} looks interesting with a conviction score of {int(conviction)}.\n\nNote: API Key missing, full alert generation skipped. Historical patterns indicate:\n{similar_text}"}
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0.3)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0.3)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an AI investment advisor for Indian retail investors. Write a plain-English, easy to understand, high-conviction alert about a stock."),

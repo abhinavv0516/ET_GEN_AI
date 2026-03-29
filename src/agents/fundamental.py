@@ -1,5 +1,5 @@
 import os
-from langchain_openai import ChatOpenAI
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from src.state import GraphState
 
@@ -7,11 +7,11 @@ def analyze_fundamentals(state: GraphState) -> GraphState:
     news = state.get("news", [])
     ticker_info = state["raw_data"].get("info", {})
     
-    # Check if OPENAI_API_KEY is set, if not mock the response for safety in hackathon
-    if not os.environ.get("OPENAI_API_KEY"):
+    # Check if GOOGLE_API_KEY is set
+    if not os.environ.get("GOOGLE_API_KEY"):
         return {"fundamental_signals": {"summary": "API Key missing, fundamental analysis skipped.", "sentiment_score": 0}}
 
-    llm = ChatOpenAI(model="gpt-4o", temperature=0)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0)
     
     prompt = ChatPromptTemplate.from_messages([
         ("system", "You are an expert financial analyst. Analyze the following news and company info to determine the fundamental outlook. Output a JSON object with 'summary' (str) and 'sentiment_score' (int from -10 to 10)."),

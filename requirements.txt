@@ -1,6 +1,6 @@
 langchain>=0.2.0
 langchain-core
-langchain-openai
+langchain-google-genai
 langgraph
 yfinance
 pandas
